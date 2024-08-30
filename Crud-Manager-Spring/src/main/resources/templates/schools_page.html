@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="cabecalho :: head"></div>
+    <title th:text="'Crud Manager - ' + ${pageTitle}"></title>
+</head>
+<body>
+    <div class="container my-2">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
+				  <div class="collapse navbar-collapse" id="navbarNav">
+				    <ul class="navbar-nav">
+				      <li class="nav-item active">
+				        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" th:href="@{/schools}">Escola</a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" th:href="@{/students}">Alunos</a>
+				      </li>
+				    </ul>
+				  </div>
+				</nav>
+        <h1 th:text="${pageTitle}">Escolas</h1>
+        <div>
+            <a th:href="@{/schools/form}" class="btn btn-primary btn-sm mb-3 float-right">
+                Adicionar Escola
+            </a>
+        </div>
+        <table class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Número de Estudantes</th>
+                    <th>Nível de Educação</th>
+                    <th>Tipo de Escola</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="school : ${schools}">
+                    <td th:text="${school.name}"></td>
+                    <td th:text="${school.numberOfStudents}"></td>
+                    <td th:text="${school.levelOfEducation}"></td>
+                    <td th:text="${school.schoolType}"></td>
+                    <td>
+                        <a th:href="@{/schools/update/{id}(id=${school.id})}" class="btn btn-primary">Alterar</a>
+                        <a th:href="@{/schools/delete/{id}(id=${school.id})}" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

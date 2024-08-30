@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="cabecalho :: head"></div>
+	
+	<title>Crud Manager - Usuários</title>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" th:href="@{/schools}">Escola</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" th:href="@{/students}">Alunos</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+	    </header>
+	<div class="container my-2">
+		<h1>Usuários</h1>
+		<div>				
+			<a th:href="@{users/form}"
+			   class="btn btn-primary btn-sm mb-3 float-right">
+	   			Adicionar Usuário
+       		</a>
+		</div>
+		<table class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Email</th>
+					<th>Gênero</th>
+					<th>Endereço</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="usuario : ${usarios}">
+					<td th:text="${usuario.name}" ></td>
+					<td th:text="${usuario.getEmail()}"></td>
+					<td th:text="${usuario.getGender()}"></td>
+					<td th:text="${usuario.getAddress().getPlace() + ', nº: ' + usuario.getAddress().getNumber()}"></td>
+					<td>
+						<a th:href="@{/users/update/{id}(id = ${usuario.id})}"
+						   class="btn btn-primary">
+							Alterar
+						</a>
+						
+						<a th:href="@{/users/delete/{id}(id = ${usuario.id})}"
+						   class="btn btn-danger">
+							Excluir
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

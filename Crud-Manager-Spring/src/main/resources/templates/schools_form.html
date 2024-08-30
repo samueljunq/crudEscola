@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="cabecalho :: head"></div>
+    <title th:text="'Crud Manager - ' + ${pageTitle}"></title>
+</head>
+<body>
+    <div class="container my-2">
+        <h1 th:text="${pageTitle}">Formulário Escola</h1>
+        <form th:action="@{/schools/register}" th:object="${school}" method="post">
+			<input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" th:field="*{name}" class="form-control">
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Nome Error</div>
+            </div>
+            <div class="form-group">
+                <label>Número de Estudantes</label>
+                <input type="text" th:field="*{numberOfStudents}" class="form-control">
+                <div th:if="${#fields.hasErrors('numberOfStudents')}" th:errors="*{numberOfStudents}">Número Error</div>
+            </div>
+            <div class="form-group">
+                <label>Nível de Educação</label>
+                <input type="text" th:field="*{levelOfEducation}" class="form-control">
+                <div th:if="${#fields.hasErrors('levelOfEducation')}" th:errors="*{levelOfEducation}">Nível Error</div>
+            </div>
+            <div class="form-group">
+                <label>Tipo de Escola</label>
+                <input type="text" th:field="*{schoolType}" class="form-control">
+                <div th:if="${#fields.hasErrors('schoolType')}" th:errors="*{schoolType}">Tipo Error</div>
+            </div>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
